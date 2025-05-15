@@ -1,0 +1,53 @@
+@import './scss/var';
+@import './scss/menu';
+
+@function font-weight($weight-name) {
+    @return map-get($font-weights, $weight-name);
+}
+
+body {
+    background-color: $primary-bg-color;
+    color: $primary-text-color;
+    font-weight: font-weight(normal);
+}
+
+.main {
+    padding-top: 40px;
+    @include flexCenter(row);
+
+    #{&}__paragraph {
+        font-size: 16px;
+        line-height: 1.5;
+
+        &:hover {
+            color: darken($primary-text-color, 20%);
+        }
+    }
+
+    #{&}__paragraph2 {
+        @extend .main__paragraph;
+
+        &:hover {
+            color: pink;
+        }
+    }
+
+    @include tabletDevice {
+        flex-direction: column;
+
+        #{&}__paragraph {
+            font-size: 14px;
+        }
+    }
+
+    @include mobileDevice {
+
+        #{&}__paragraph {
+            font-size: 12px;
+        }
+    }
+}
+
+.light-theme {
+    @include theme(true);
+}

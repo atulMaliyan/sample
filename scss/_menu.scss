@@ -1,0 +1,143 @@
+header {
+    background-color: lighten($primary-bg-color, 100%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: $primary-text-color;
+    }
+
+    .menu {
+        &.mobile-menu-open {
+            background-color: lighten($primary-bg-color, 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+            display: flex;
+            @include flexCenter(column);
+
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            @include mobileDevice {
+                display: none;
+            }
+
+            li {
+                list-style-type: none;
+                display: inline-block;
+                text-transform: uppercase;
+
+                a {
+                    text-decoration: none;
+                    color: $primary-text-color;
+                    padding: 15px;
+                    display: block;
+
+                    &:hover {
+                        background-color: darken($primary-bg-color, 10%);
+                        color: lighten($primary-text-color, 20%);
+                    }
+                }
+            }
+
+            &.open {
+                display: block;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: lighten($primary-bg-color, 100%);
+                z-index: 99;
+
+                li {
+                    display: block;
+                    text-align: center;
+
+                    a {
+                        padding: 10px;
+                        border-bottom: 1px solid $primary-text-color;
+                    }
+                }
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+
+            .hamburger {
+                width: 30px;
+                height: 3px;
+                background-color: $primary-text-color;
+                margin: 6px 0;
+                position: relative;
+                @include transition;
+
+                &::before {
+                    content: '';
+                    width: 30px;
+                    height: 3px;
+                    background-color: $primary-text-color;
+                    position: absolute;
+                    top: -10px;
+                    left: 0;
+                    @include transition;
+                }
+
+                &::after {
+                    content: '';
+                    width: 30px;
+                    height: 3px;
+                    background-color: $primary-text-color;
+                    position: absolute;
+                    top: 10px;
+                    left: 0;
+                    @include transition;
+                }
+
+                &.open {
+                    transform: rotate(720deg);
+                    background: transparent;
+
+                    &::before {
+                        transform: rotate(45deg);
+                        top: 0;
+                    }
+
+                    &::after {
+                        transform: rotate(-45deg);
+                        top: 0;
+                    }
+                }
+            }
+
+            @include mobileDevice {
+                display: block;
+            }
+        }
+    }
+}
+
+;
+
+@for $i from 1 through 4 {
+    header .menu ul li:nth-child(#{$i}) {
+        transition-delay: ($i * 0.1s) + 0.2s;
+
+    }
+}

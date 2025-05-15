@@ -1,0 +1,43 @@
+$primary-bg-color: #333;
+$primary-text-color: #666666;
+
+$font-weights: (
+    light: 300,
+    normal: 400,
+    bold: 700
+);
+
+$responsive-breakpoints: (
+    mobile: 480px,
+    tablet: 768px,
+);
+
+@mixin flexCenter($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+@mixin theme($light-theme: true) {
+    @if $light-theme {
+        background: lighten($primary-bg-color, 100%);
+        color: darken($primary-text-color, 100%);
+    }
+}
+
+@mixin mobileDevice {
+    @media screen and (max-width: map-get($responsive-breakpoints, mobile)) {
+        @content;
+    }
+}
+
+@mixin tabletDevice {
+    @media screen and (max-width: map-get($responsive-breakpoints, tablet)) {
+        @content;
+    }
+}
+
+@mixin transition {
+    transition: all 0.3s ease;
+}
